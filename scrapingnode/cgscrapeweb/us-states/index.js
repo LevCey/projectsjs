@@ -9,12 +9,11 @@ async function getUSStates() {
     const { data } = await axios.get(page_url);
     const $ = cheerio.load(data);
     const table = $('caption:contains("States of the United States of America")').parent();
-    const body = table.find('tbody tr').each((i, element) => {
+    const body = table.find('tbody tr').slice(2).each((i, element) => {
         const $element = $(element);
         const state = {};
-        state.name = $element.find('th').text();
+        state.name = $element.find('th a').first().text().trim();
         console.log(state);
-
     });
 
 }
