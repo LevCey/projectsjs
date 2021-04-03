@@ -10,10 +10,17 @@ async function getUSStates() {
     const $ = cheerio.load(data);
     const table = $('caption:contains("States of the United States of America")').parent();
     const body = table.find('tbody tr').slice(2).each((i, element) => {
-        const $element = $(element);
+        const $row = $(element);
         const state = {};
-        state.name = $element.find('th a').first().text().trim();
-        console.log(state);
+        state.name = $row.find('th a').first().text().trim();
+        const columns = $row.find('td');
+        state.code = columns.get(0).text();
+        if (columns.length === 12) {
+
+        } else {
+
+        }
+        states.push(state);
     });
 
 }
