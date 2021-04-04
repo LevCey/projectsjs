@@ -1,10 +1,10 @@
 {
-  "name": "OpenGraphScraper",
+  "name": "opengraphscraper",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "parcel serve src/index.html"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +17,8 @@
     "express": "^4.17.1",
     "xmldom": "^0.5.0",
     "xpath": "0.0.32"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.0-beta.2"
   }
 }
