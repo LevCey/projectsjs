@@ -9,9 +9,33 @@ const app = express();
 app.use(express.json()); // body-parser alternative
 app.use(cors());
 
+app.post('/scrape', (req, res) => {
+    const { body } = req;
+    const { url } = url;
+
+    return parseUrl(url)
+        .then((result) => res.json(result));
+});
+
+app.listen(3000, () => console.log('OG Scraber Listening...'));
+
 const xpaths = {
     title: 'string(//meta[@property="og:title"]/@content)',
     description: 'string(//meta[@property="og:description"]/@content)',
     image: 'string(//meta[@property="og:image"]/@content)',
     keywords: 'string(//meta[@property="og:keywords"]/@content)',
 };
+
+const retrievePage = url => axios.request({ url });
+const convertBodyToDocument = body => new DOMParser().parseFromString(body);
+const nodesFromDocument = (document, xpathselector) => xpath.select(xpathselector, document);
+const mapProperties = (paths, document) =>
+    Object.keys(paths).reduce((acc, key) =>
+        ({ ...acc, [key]: nodesFromDocument(document, paths[key]) }), {});
+
+const parseUrl = url =>
+    retrievePage(url)
+        .then((response) => {
+            const document = convertBodyToDocument(response.data);
+            const mappedProperties = mapProperties();
+        });
