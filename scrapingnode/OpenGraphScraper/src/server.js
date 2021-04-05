@@ -11,7 +11,7 @@ app.use(cors());
 
 app.post('/scrape', (req, res) => {
     const { body } = req;
-    const { url } = url;
+    const { url } = body;
 
     return parseUrl(url)
         .then((result) => res.json(result));
@@ -23,7 +23,7 @@ const xpaths = {
     title: 'string(//meta[@property="og:title"]/@content)',
     description: 'string(//meta[@property="og:description"]/@content)',
     image: 'string(//meta[@property="og:image"]/@content)',
-    keywords: 'string(//meta[@property="og:keywords"]/@content)',
+    keywords: 'string(//meta[@property="keywords"]/@content)',
 };
 
 const retrievePage = url => axios.request({ url });
@@ -37,5 +37,8 @@ const parseUrl = url =>
     retrievePage(url)
         .then((response) => {
             const document = convertBodyToDocument(response.data);
-            const mappedProperties = mapProperties();
+            const mappedProperties = mapProperties(xpaths, document);
+            return mappedProperties;
         });
+
+

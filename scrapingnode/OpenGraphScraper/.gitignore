@@ -2,6 +2,8 @@
 Quickstart-888c645466f3.json
 Quickstart*
 
+.parcel-cache
+dist
 
 # Logs
 logs
