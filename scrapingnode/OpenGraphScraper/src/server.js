@@ -1,13 +1,13 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const axios = require('axios');
 const xpath = require('xpath');
 const { DOMParser } = require('xmldom');
 const cors = require('cors');
 
 const app = express();
-app.use(express.json()); // body-parser alternative
 app.use(cors());
+app.use(express.json()); // body-parser alternative
 
 app.post('/scrape', (req, res) => {
     const { body } = req;
