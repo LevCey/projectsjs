@@ -1,6 +1,8 @@
 # Building a Serverless Web Scraper with the AWS Cloud Development Kit
 
 Tutorial : https://www.martinmck.com/posts/convert-a-website-into-an-api-building-a-serverless-web-scraper-with-the-aws-cloud-development-kit/
+ 
+GITHUB: https://github.com/shogunpurple/aws-cdk-scraper
 
 This is a blank project for JavaScript development with CDK.
 
