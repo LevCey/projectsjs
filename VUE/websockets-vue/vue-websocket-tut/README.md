@@ -1,4 +1,6 @@
 # vue-websocket-tut
+ https://tutorialedge.net/javascript/vuejs/vuejs-websocket-tutorial/
+ https://youtu.be/4via-J98jwM
 
 ## Project setup
 ```

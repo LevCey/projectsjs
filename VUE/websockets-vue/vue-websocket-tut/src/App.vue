@@ -1,19 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from "./components/HelloWorld.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    HelloWorld,
+  },
+  data: function () {
+    return {
+      connection: null,
+    };
+  },
+  created: function () {
+    console.log("Starting Connection to Websocket Server");
+    this.connection = new WebSocket("wss://echo.websocket.org");
+
+    this.connection.onopen = function (event) {
+      console.log(event);
+      console.log("Succesfully connected to the echo WebSocket Server");
+    };
+
+    this.connection.onmessage = function (event) {
+      console.log(event);
+    };
+  },
+};
 </script>
 
 <style>
