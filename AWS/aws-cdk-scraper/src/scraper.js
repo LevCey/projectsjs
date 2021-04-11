@@ -1,10 +1,11 @@
-
+const AWS = require('aws-sdk');
 const cheerio = require('cheerio');
 const fetch = require("node-fetch");
 
 const TABLE_NAME = process.env.TABLE_NAME;
 const SCAPER_URL = "http://statleaders.ufc.com/";
 
+const client = new AWS.DynamoDB.DocumentClient();
 
 exports.scrape = async function (event, context) {  // exports.scrape =
     // fetch the HTML from the UFC website
@@ -46,6 +47,30 @@ exports.scrape = async function (event, context) {  // exports.scrape =
             });
     });
 
-    // let’s print the results for debugging purposes
-    fighterStatistics.forEach(console.log);
+    try {
+        // Write all the fighter statistics into DynamoDB
+        await Promise.all(fighterStatistics.map((result) =>
+            client
+                .put({
+                    TableName: TABLE_NAME,
+                    Item: result,
+                })
+                .promise()
+        ));
+
+        return {
+            statusCode: 200,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                results: fighterStatistics,
+            }),
+        };
+    } catch (error) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify(error),
+        };
+    }
 };

@@ -38,6 +38,15 @@ class AwsCdkScraperStack extends cdk.Stack {
       },
     });
 
+    const fighterApiLambda = new lambda.Function(this, "fighterApi", {
+      runtime: lambda.Runtime.NODEJS_10_X,
+      code: lambda.Code.fromAsset("src"),
+      handler: "queryStats.query",
+      environment: {
+        TABLE_NAME: fighterStatsTable.tableName,
+      },
+    });
+
     // Create API Gateway API
     const api = new apiGateway.RestApi(this, "ufc-scraper-api", {
       restApiName: "UFC Stats Scraper",
