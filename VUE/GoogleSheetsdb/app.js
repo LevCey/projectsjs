@@ -3,7 +3,7 @@
 // Set trigger for Google sheets scripts.
 function createTrigger() {
     // Trigger once a day
-    ScriptApp.newTrigger('getCovidDataAndUpdateSpreadSheet')
+    ScriptApp.newTrigger('fetchData')
         .timeBased()
         .atHour(8)
         .everyDays(1) // Frequency is required if you are using atHour() or nearMinute()
