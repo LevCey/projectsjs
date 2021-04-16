@@ -1,5 +1,9 @@
 // https://youtu.be/iIhEyrYfqbA
 
+// Deployment ID
+// AKfycbwz7zVN1hqKs0KLdljR9TW-Os_IpYM8bPxaA6ps1ID2FjUnhXtC9HA38g8N0vXXg92o
+// https://script.google.com/macros/s/AKfycbwz7zVN1hqKs0KLdljR9TW-Os_IpYM8bPxaA6ps1ID2FjUnhXtC9HA38g8N0vXXg92o/exec
+
 // Set trigger for Google sheets scripts.
 function createTrigger() {
     // Trigger once a day
@@ -12,6 +16,8 @@ function createTrigger() {
 
 // =IMPORTXML("https://www.amazon.sa/بواجهات-اندرويد-كمقاومة-والغبار-تيك/dp/B08HMRY8NG/ref=sr_1_2?dchild=1&keywords=agptek+smart+watch&qid=1618457514&sr=8-2","//*[@id='priceblock_ourprice']")
 
+// Google sheets , ilk sütunda url, ikinci sütünda xpath eklenir, 
+// bu script ile 3. sütünda IMPORTXML ile sonuçlar eklenir.
 function fetchData() {
     var wrkBk = SpreadsheetApp.getActiveSpreadsheet();
     var wrkSht = wrkBk.getSheetByName("Sheet1");
