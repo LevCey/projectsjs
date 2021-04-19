@@ -1,0 +1,70 @@
+body {
+    padding-bottom: 128px;
+}
+
+#header {
+    margin: 16px 0px 16px 0px;
+}
+
+#search {
+    padding: 22px 16px 22px 16px;
+}
+
+#qouteslev{
+    height: max-content;
+    width: max-content;
+}
+.quote {
+    margin-bottom: 16px;
+    padding: 10px 10px 24px 10px;
+    border-bottom: 1px dotted #CECECE;
+}
+
+.quote-text {
+    font-size: 1.2em;
+}
+
+.author {
+    margin-left: 24px;
+    font-weight: bold;
+    color: #676767;
+}
+
+.source {
+    font-size: 0.8em;
+    color: #676767;
+}
+
+.tag-container {
+    text-align: right;
+}
+
+.tag {
+    border-radius: 12px;
+    background-color: #17A2B8;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    margin-left: 5px;
+    font-size: 0.8em;
+}
+
+#sidebar {
+    padding: 12px;
+}
+
+.menu-item {
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    color: #4477AA;
+}
+
+#reset-filter {
+    cursor: pointer;
+    margin-bottom: 24px;
+}
+
+#reset-filter:hover {
+    color: #4477AA;
+}
