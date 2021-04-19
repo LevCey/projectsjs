@@ -1,5 +1,5 @@
 <!--Amz qoutes from google sheets-->
-
+<!--Lev import amz product price update from Google sheet -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,16 +9,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amz qoutes from google sheets</title>
 
+    <!--http://getskeleton.com/-->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" as="style"
+        onload="this.rel='stylesheet'">
+    <link rel="preload" href="styles.css" as="style" onload="this.rel='stylesheet'">
+
+    <script async src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 </head>
 
 <body>
-    <h1>Amz qoutes from google sheets</h1>
+    <h1>Amz qoutes from Google Sheets</h1>
     <div>
+
         <p>Google sheets as a backend solutions and Vue js for frontend side</p>
+    </div>
+    <div>
+        <img async src="assets/img/bird.webp" alt="Bird Bird 🐦" width="256" height="128">
+    </div>
+
+    <!--Vuejs app section-->
+    <div id="app" v-show="product.inStock">
+        <p>{{info}}</p>
+        <p>in Stock: {{product.inStock ? 'Yes' : 'No'}}</p>
+    </div>
+
+    <div id="content" class="container">
+        <div id="header" class="row">
+            <h2>Price list lowest first</h2>
+        </div>
+
+        <div class="row">
+            <div id="quotes" class="col-lg-9">
+                <div v-for="quote in quotes" class="quote">
+                    <div class="quote-text">"{{ quote.quote }}"</div>
+                    <div>
+                        <span class="author">- {{ quote.author}}</span>
+                        <span class="source" v-if="quote.source != ''">({{ quote.source }})</span>
+                    </div>
+                    <div class="tag-container">
+                        <span v-for="tag in quote.tags" class="tag">
+                            {{ tag }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+        // URL to the JSON data of the Google Spreadsheet
+        var gsheet_url = "https://spreadsheets.google.com/feeds/list/1eNmGC4mZpIGx9vyL_Y0m0wEvsnlREGYoj04LH9atoTg/1/public/values?alt=json";
+
+        // Global variables to hold the data from the spreadsheet
+        var qoutesList = [];
+
+        window.addEventListener("load", () => { // vue cdn'de async olarak full yüklenince çeliıması için 
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    info: 'Hello World',
+                    product: {
+                        inStock: true
+                    },
+                },
+                mounted() {
+                    axios
+                        .get(gsheet_url)
+                        .then(response => (
+                            parseData(response.data.feed.entry)
+                        ))
+                }
+            });
+
+            var quotes = new Vue({
+                el: '#quotes',
+                data: {
+                    quotes: qoutesList
+                }
+            });
+
+        });
+
+        function parseData(entries) {
+
+            entries.forEach(function (value) {
+                var entry = {
+                    "quote": value.gsx$quote.$t,
+                    "author": value.gsx$author.$t,
+                    "source": value.gsx$source.$t,
+                    "tags": value.gsx$tags.$t.split(",")
+                };
+
+                qoutesList.push(entry);
+            });
+            quotes.quotes = qoutesList;
+            //console.log(qoutesList[0].author);
+        }
+
+    </script>
 
 </body>
 
