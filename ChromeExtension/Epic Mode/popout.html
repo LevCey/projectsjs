@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-  <head>
-    <meta charset="utf-8">
-    <title>Popout Page</title>
-  </head>
-  <body>
-    <h1>Play Random Music</h1>
-    <audio src="1.mp3" controls></audio>
-    <script src="popout.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Popout Page</title>
+  <style>
+    body {
+      width: 400px;
+      background-color: grey;
+
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Play Random Music</h1>
+  <select name="music" id="123">
+    <option value="1" selected>Track One</option>
+    <option value="2">Track Two</option>
+    <option value="3">Track Three</option>
+  </select>
+  <button class="play">Play</button>
+  <button class="pause">Pause</button>
+  <script src="popout.js"></script>
+</body>
+
 </html>
