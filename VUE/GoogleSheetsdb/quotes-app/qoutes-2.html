@@ -1,0 +1,106 @@
+<!--Amz qoutes from google sheets-->
+<!--Lev import amz product price update from Google sheet -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amz qoutes from google sheets</title>
+
+    <!--http://getskeleton.com/-->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" as="style"
+        onload="this.rel='stylesheet'">
+    <link rel="preload" href="styles.css" as="style" onload="this.rel='stylesheet'">
+
+    <!-- <script async src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>  -->
+    <!-- Production Vuejs cdn-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div id="header" class="row">
+            <h2>Amz qoutes from Google Sheets</h2>
+        </div>
+
+        <div class="row">
+            <div id="quotes" class="qouteslev">
+                <div>
+                    <h3>Product title {{info}}</h3>
+                    <p>
+                        Product Description .....Product Description .....Product Description .....
+                        <br> Product Description .....Product Description .....Product Description .....
+                    </p>
+                    <div class="row">
+                        <div id="prices" class="qouteslev">
+                            <div v-for="price in prices" class="quote">
+                                <div class="quote-text">"{{ price.price }}"</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span>Product image</span> <br>
+                    <img async src="/assets/img/bird.webp" alt="Product" height="256" width="256">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        // CVS olarak indiriyor. 
+        var gsheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSC4YqePMXTZTMYVW_mS9O6YyoHN6R8YDG0zkSyNZalxKaJnuDb0pENIsmBmUHcXkINQtAmoUJcAYCa/pub?output=csv";
+
+        var priceList = [];
+
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                info: 'Prices',
+            },
+
+            mounted() {
+                axios
+                    .get(gsheet_url)
+                    .then(response => (
+                        parseData(response.data.split("\n"))
+                    ))
+            },
+
+        });
+        var prices = new Vue({
+            el: '#prices',
+            data: {
+                prices: priceList
+            }
+        });
+
+        function parseData(entries) {
+
+            entries.forEach(function (value) {
+                console.log(value);
+                var entry = {
+                    "price": value,
+                };
+                // console.log(entry);
+                priceList.push(entry);
+                console.log(priceList);
+            });
+            prices.prices = priceList;
+
+            /*priceList = entries.split("\n");
+            app.prices = priceList
+            console.log(app.prices[0]);*/
+
+
+        }
+    </script>
+
+</body>
+
+</html>
