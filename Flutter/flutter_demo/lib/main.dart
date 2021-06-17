@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,13 +29,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,20 +42,63 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            Container(
+                width: 100,
+                height: 100,
+                child: Image.asset('assets/images/flutter_logo.jpg')),
+            Padding(
+              padding: const EdgeInsets.only(
+                  right: 50.0, left: 50.0, top: 18, bottom: 18),
+              child: TextFormField(
+                controller: _usernameController,
+                style: TextStyle(color: Colors.black, fontSize: 20),
+                cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  hintText: 'Input Username',
+                  border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue)),
+                ),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Padding(
+              padding: const EdgeInsets.only(
+                  right: 50.0, left: 50.0, top: 8, bottom: 50),
+              child: TextFormField(
+                obscureText: true,
+                controller: _passwordController,
+                style: TextStyle(color: Colors.black, fontSize: 20),
+                cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  hintText: 'Input Password',
+                  border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black)),
+                  focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue)),
+                ),
+              ),
             ),
+            Container(
+              width: MediaQuery.of(context).size.width / 1.2,
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(35.0),
+                color: Colors.amberAccent,
+              ),
+              child: MaterialButton(
+                onPressed: () {
+                  print('Username: ' + _usernameController.text);
+                  print('Password: ' + _passwordController.text);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                },
+                child: Text('Press'),
+                // route
+              ),
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
