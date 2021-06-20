@@ -2,59 +2,44 @@
 
 <head>
   <meta charset="utf-8">
-  <title>ToDo List</title>
+  <title>Simple Scraper</title>
   <style>
     body {
-      width: 300px;
+      max-height: 500px;
+      overflow: auto;
+      width: 350px;
     }
 
-    .todo-items,
-    .todo-items li {
-      margin: 0;
-      padding: 0;
-      list-style: none;
+    select {
+      width: 55px;
     }
 
-    .todo-items li {
-      padding: 10px;
-      border-bottom: 2px solid grey;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .todo-items li:hover {
-      background-color: rgba(0, 0, 0, 0.25);
-    }
-
-    .todo-items li.done .item {
-      text-decoration: line-through;
-    }
-
-    .todo-items div span {
-      margin: 5px;
-      font-size: 1em;
-      cursor: pointer;
-    }
-
-    .new-item {
-      display: none;
+    input {
+      width: 100px;
     }
   </style>
 </head>
 
 <body>
-  <h1>My ToDo's</h1>
+  <h1>Setup Scrape</h1>
+  <div class="commands-list">
+    <div class="command-item">
+      <select>
+        <option value="wait">Wait</option>
+        <option value="click">Click</option>
+        <option value="enter">Enter</option>
+        <option value="save">Save</option>
+      </select>
+      <input class="value-1" placeholder="200ms" />
+      <input class="value-2" placeholder="Optional" />
+    </div>
 
-  <button class="create-todo">New Item</button>
-  <div class="new-item">
-    <input class="new-item">
-    <button>Save</button>
   </div>
 
-  <ul class="todo-items">
-
-  </ul>
-
+  <div class="action-buttons">
+    <button class="new-command">Add Command</button>
+    <button class="run-command">Run Command</button>
+  </div>
 
   <script src="popout.js"></script>
 </body>
