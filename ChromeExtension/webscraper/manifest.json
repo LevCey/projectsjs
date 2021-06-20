@@ -1,0 +1,21 @@
+{
+  "name": "Simple Scraper",
+  "version": "0.01",
+  "description": "Simple Scraper chrome extension",
+  "browser_action": {
+    "default_title": "Simple Scraper",
+    "default_popup": "popout.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2
+}
