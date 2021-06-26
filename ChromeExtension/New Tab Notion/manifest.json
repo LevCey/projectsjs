@@ -1,0 +1,14 @@
+{
+    "name": "New Tab Notes",
+    "version": "0.01",
+    "description": "New Tab Notes",
+    "background": {
+        "page": "background.html",
+        "persistent": false
+    },
+    "chrome_url_overrides": {
+        "newtab": "newtab.html"
+    },
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://wwww.googleapis.com; object-src 'self'"
+}
