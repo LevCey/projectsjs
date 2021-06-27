@@ -10,5 +10,5 @@
         "newtab": "newtab.html"
     },
     "manifest_version": 2,
-    "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://wwww.googleapis.com; object-src 'self'"
+    "content_security_policy": "script-src 'self'  https://www.gstatic.com/ https://*.firebaseio.com https://wwww.googleapis.com  https://cdn.jsdelivr.net; object-src 'self'"
 }
