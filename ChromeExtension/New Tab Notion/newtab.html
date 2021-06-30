@@ -65,9 +65,24 @@
     .holder div.icon {
         cursor: pointer;
     }
+
+    [contenteditable]:focus {
+        outline: 0px solid;
+    }
+
+    [placeholder]:empty:before {
+        content: attr(placeholder);
+        color: blue;
+        opacity: 0.5;
+    }
+
+    [placeholder]:empty:focus:before {
+        content: "";
+    }
 </style>
 
-<body class="dark">
+<body>
+    <!--class="dark"-->
     <div class="main">
         <aside class="sidebar">
             <div class="icon">📝</div>
@@ -79,8 +94,8 @@
             <div class="icon">📋</div>
             <div class="action">
             </div>
-            <h1>Note Title</h1>
-            <div class="post-body">Content of the note ...</div>
+            <h1 contenteditable="true" placeholder="Untitled"></h1>
+            <div class="post-body" contenteditable="true" placeholder="write your post here..."></div>
         </section>
 
 
