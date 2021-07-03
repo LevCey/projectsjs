@@ -1,5 +1,6 @@
 
 window.firstOpen = false;
+
 function fetchNotes() {
     document.querySelector('.pages-holder').innerHTML = '';
     chrome.runtime.sendMessage({ command: "fetchNotes", data: { notes: '' } }, (response) => {
@@ -18,6 +19,8 @@ function fetchNotes() {
 
     listenForClicks();
 }
+
+fetchNotes();
 
 function clearNotes() {
 
@@ -43,9 +46,14 @@ function listenForClicks() {
     }
 
     try {
+        var openNote = localStorage.getItem('_notes_lastOpenPage');
+        if (openNote != '') {
+            document.querySelector(`ul li[date-noteId="` + openNote + `"]`).click();
+        }
+
 
     } catch (e) {
-
+        console.log(e);
     }
 
 }

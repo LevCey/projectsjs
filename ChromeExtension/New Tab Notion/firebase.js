@@ -14,9 +14,12 @@ console.log(firebase);
 
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
 
-  if (msg.command == 'pcreateNote..') {
-
+  if (msg.command == 'fetchNotes') {
+    firebase.database().ref('/notes').once('value').then(function (snapshot) {
+      response({ type: "result", status: "success", data: snapshot.val(), request: msg });
+    });
   }
 
+  return true;
 
 });
